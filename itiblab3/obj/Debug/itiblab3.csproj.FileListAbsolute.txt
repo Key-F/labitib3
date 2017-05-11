@@ -1,0 +1,9 @@
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\bin\Debug\itiblab3.exe.config
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\bin\Debug\itiblab3.exe
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\bin\Debug\itiblab3.pdb
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.csprojResolveAssemblyReference.cache
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.Form1.resources
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.Properties.Resources.resources
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.csproj.GenerateResource.Cache
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.exe
+c:\users\keyf\documents\visual studio 2013\Projects\itiblab3\itiblab3\obj\Debug\itiblab3.pdb
