@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace itiblab3
 {
@@ -263,6 +264,60 @@ namespace itiblab3
                 MessageBox.Show("Скопировано", "Сообщение", MessageBoxButtons.OK);
             }
             label8.Visible = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string s = DateTime.Now.ToString("dd_MMMM_yyyy_HH-mm-ss");
+            string filename="log_" + s + ".txt";
+            //string path = (Directory.GetCurrentDirectory() + "\\.." + "\\.."); // Плохой способ
+            string path = Directory.GetCurrentDirectory();
+            string npath = Directory.GetParent(path).FullName;
+            string nnpath = Directory.GetParent(npath).FullName;
+            if (!Directory.Exists(nnpath + "/logs"))
+            {
+                Directory.CreateDirectory(nnpath + "/logs");
+            } 
+            //File.Create(path + "/logs/" + filename);
+           // File.WriteAllText(filename, richTextBox1.Text);
+            FileStream fs = File.Create(nnpath + "/logs/" + filename);
+            StreamWriter writer = new StreamWriter(fs);
+            string[] tempArray = richTextBox1.Lines;
+            for (int i = 0; i < richTextBox1.Lines.Length; i++ )
+                writer.WriteLine(tempArray[i]); //что-то пишем
+            writer.Close();
+            MessageBox.Show("Сохранено в " + nnpath + "\\logs\\" + filename, "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               /* // create a writer and open the file
+                TextWriter tw = new StreamWriter(folderBrowserDialog3save.SelectedPath + "logfile1.txt");
+                // write a line of text to the file
+                File.WriteAllText(filename, richTextBox1.Text);
+                tw.WriteLine(logfiletextbox);
+                // close the stream
+                tw.Close(); */
+                //MessageBox.Show("Saved to " + folderBrowserDialog3save.SelectedPath + "\\logfile.txt", "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        
+            
+        {
+   // Create a SaveFileDialog to request a path and file name to save to.
+   SaveFileDialog saveFile1 = new SaveFileDialog();
+
+   // Initialize the SaveFileDialog to specify the RTF extension for the file.
+   saveFile1.DefaultExt = "*.rtf";
+   saveFile1.Filter = "TXT Files (*.txt)|*.txt|RTF Files|*.rtf|All files (*.*)|*.*"; // https://msdn.microsoft.com/ru-ru/library/e4a710b1(v=vs.110).aspx
+
+   // Determine if the user selected a file name from the saveFileDialog.
+   if(saveFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK &&
+      saveFile1.FileName.Length > 0) 
+   {
+      // Save the contents of the RichTextBox into the file.
+      richTextBox1.SaveFile(saveFile1.FileName, RichTextBoxStreamType.PlainText);
+   }
+
+
         }
     }
 }
