@@ -106,7 +106,7 @@ namespace itiblab3
             double[,] WSKR = new double[N + 1, J];
             double[,] WVIH = new double[J + 1, M]; // веса скрытого и выходного слоев
 
-            for (int j = 0; j < J; j++)
+           /* for (int j = 0; j < J; j++)
                 for (int i = 0; i < N + 1; i++)
                 {
                     WSKR[i, j] = i + j + 1;
@@ -115,9 +115,9 @@ namespace itiblab3
                 for (int i = 0; i < J + 1; i++)
                 {
                 WVIH[i, j] = i + j + 2;
-                }
+                }*/
             for (int i = 0; i < t10.Length; i++)
-                t10[i] = t10[i] * 0.1;
+                t10[i] = t10[i] * 0.1; 
             work(N, J, M, t10, X, netSKR, netVIH, OutSKR, OutVIH, SigmaSKR, SigmaVIH, WSKR, WVIH);
         }
         public  void work(int N, int J, int M, double[] t, double[] X1, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
@@ -157,7 +157,7 @@ namespace itiblab3
                         richTextBox1.AppendText(vvv + " ");
                     }
                     richTextBox1.AppendText(Environment.NewLine);
-                    richTextBox1.AppendText("    W1" + Environment.NewLine);
+                    richTextBox1.AppendText("  " + "  Веса скрытого слоя W1" + Environment.NewLine);
                     for (int i = 0; i < N + 1; i++)
                     {
                         for (int j = 0; j < J; j++)
@@ -167,7 +167,7 @@ namespace itiblab3
                         richTextBox1.AppendText(Environment.NewLine);
                     }
 
-                    richTextBox1.AppendText("    W2" + (Environment.NewLine));
+                    richTextBox1.AppendText("  Веса внешнего слоя W2" + (Environment.NewLine));
                     for (int i = 0; i < J; i++)
                     {
                         for (int j = 0; j < M; j++)
@@ -195,7 +195,7 @@ namespace itiblab3
                         richTextBox1.AppendText(vvv + " ");
                     }
                     richTextBox1.AppendText(Environment.NewLine);
-                    richTextBox1.AppendText("    W1" + Environment.NewLine);
+                    richTextBox1.AppendText("   Веса скрытого слоя W1" + Environment.NewLine);
                     for (int i = 0; i < N + 1; i++)
                     {
                         for (int j = 0; j < J; j++)
@@ -205,7 +205,7 @@ namespace itiblab3
                         richTextBox1.AppendText(Environment.NewLine);
                     }
 
-                    richTextBox1.AppendText("    W2" + (Environment.NewLine));
+                    richTextBox1.AppendText("  Веса внешнего слоя W2" + (Environment.NewLine));
                     for (int i = 0; i < J; i++)
                     {
                         for (int j = 0; j < M; j++)

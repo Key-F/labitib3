@@ -13,7 +13,7 @@ namespace itiblab3
             double[] Sigma = new double[M];
             for (int i = 0; i < M; i++)
             {
-                Sigma[i] = 0.5 * (1 - part1.fnet(net[i])) * (t[i] - y[i]);
+                Sigma[i] = 0.5 * (1 - part1.fnet(net[i]) * part1.fnet(net[i])) * (t[i] - y[i]);
             }
             return Sigma;
         }
