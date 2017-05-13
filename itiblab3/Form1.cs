@@ -109,6 +109,19 @@ namespace itiblab3
             double[] SigmaVIH = new double[M + 1]; // ошибки скрытого и выходного слоев.
             double[,] WSKR = new double[N + 1, J];
             double[,] WVIH = new double[J + 1, M]; // веса скрытого и выходного слоев
+
+
+            if (radioButton2.Checked == true)  // Вывод всей инфы в рабочее поле
+            {
+                string a1 = textBox11.Text;
+                string b1 = textBox12.Text;
+                richTextBox1.AppendText("       a = " + a1 + "; b = " + b1 + Environment.NewLine);
+            }
+            richTextBox1.AppendText("       N-J-M: " + textBox1.Text + "-" + textBox3.Text + "-" + textBox2.Text + Environment.NewLine);
+            richTextBox1.AppendText("       x: (" + textBox4.Text + ", " + textBox5.Text + ", " + textBox6.Text + ")" + Environment.NewLine);
+            richTextBox1.AppendText("      10t: (" + textBox7.Text + ", " + textBox8.Text + ", " + textBox9.Text + ")" + Environment.NewLine);
+
+
             var random = new Random();
             if (radioButton1.Checked == true)
             {
@@ -160,6 +173,7 @@ namespace itiblab3
                 
                 W1 = formula.SetW(W1, N, J, 1, X1, Sigma1);
                 W2 = formula.SetW(W2, J, M, 1, Out1, Sigma2);
+
                 double err = formula.error(t, Out2, M);
                                  
                 if (err > 0)
@@ -270,6 +284,7 @@ namespace itiblab3
         {
             label8.Visible = true;
             label8.Update();
+            
             string s = DateTime.Now.ToString("dd_MMMM_yyyy_HH-mm-ss");
             string filename="log_" + s + ".txt";
             //string path = (Directory.GetCurrentDirectory() + "\\.." + "\\.."); // Плохой способ
@@ -285,6 +300,7 @@ namespace itiblab3
             FileStream fs = File.Create(nnpath + "/logs/" + filename);
             StreamWriter writer = new StreamWriter(fs);
             string[] tempArray = richTextBox1.Lines;
+            
             for (int i = 0; i < richTextBox1.Lines.Length; i++ )
                 writer.WriteLine(tempArray[i]); //что-то пишем
             writer.Close();
