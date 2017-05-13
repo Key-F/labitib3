@@ -105,17 +105,19 @@ namespace itiblab3
             double[] SigmaVIH = new double[M + 1]; // ошибки скрытого и выходного слоев.
             double[,] WSKR = new double[N + 1, J];
             double[,] WVIH = new double[J + 1, M]; // веса скрытого и выходного слоев
+            var random = new Random();
+            //var val = (float)random.Next(206, 507) / 10f;
 
-           /* for (int j = 0; j < J; j++)
+            for (int j = 0; j < J; j++)
                 for (int i = 0; i < N + 1; i++)
                 {
-                    WSKR[i, j] = i + j + 1;
+                    WSKR[i, j] = (float)random.Next(1, 10) / 10f;
                 }
             for (int j = 0; j < M; j++)
                 for (int i = 0; i < J + 1; i++)
                 {
-                WVIH[i, j] = i + j + 2;
-                }*/
+                    WVIH[i, j] = (float)random.Next(1, 10) / 10f;
+                }
             for (int i = 0; i < t10.Length; i++)
                 t10[i] = t10[i] * 0.1; 
             work(N, J, M, t10, X, netSKR, netVIH, OutSKR, OutVIH, SigmaSKR, SigmaVIH, WSKR, WVIH);
@@ -136,14 +138,7 @@ namespace itiblab3
                 W1 = formula.SetW(W1, N, J, 1, X1, Sigma1);
                 W2 = formula.SetW(W2, J, M, 1, Out1, Sigma2);
                 double err = formula.error(t, Out2, M);
-                 
-                
-               /* if (err > 0){
-                    count++;
-                    work(N, J, M, t, X1, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
-                }
-                else richTextBox1.AppendText("End");
-                */
+                                 
                 if (err > 0)
                 {
                     count++;
