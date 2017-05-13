@@ -132,12 +132,12 @@ namespace itiblab3
                 for (int j = 0; j < J; j++)
                     for (int i = 0; i < N + 1; i++)
                     {
-                        WSKR[i, j] = (float)random.Next(a, b) / 10f;
+                        WSKR[i, j] = (float)random.Next(10 * a, 10 * b) / 10f;
                     }
                 for (int j = 0; j < M; j++)
                     for (int i = 0; i < J + 1; i++)
                     {
-                        WVIH[i, j] = (float)random.Next(1, 10) / 10f;
+                        WVIH[i, j] = (float)random.Next(10 * a, 10 * b) / 10f;
                     }
             }
             for (int i = 0; i < t10.Length; i++)
@@ -249,7 +249,7 @@ namespace itiblab3
             richTextBox1.Clear();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Копирование в буфер обмена
         {
             label8.Visible = true;
             label8.Update();
@@ -266,8 +266,10 @@ namespace itiblab3
             label8.Visible = false;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) // Запись лога
         {
+            label8.Visible = true;
+            label8.Update();
             string s = DateTime.Now.ToString("dd_MMMM_yyyy_HH-mm-ss");
             string filename="log_" + s + ".txt";
             //string path = (Directory.GetCurrentDirectory() + "\\.." + "\\.."); // Плохой способ
@@ -287,37 +289,24 @@ namespace itiblab3
                 writer.WriteLine(tempArray[i]); //что-то пишем
             writer.Close();
             MessageBox.Show("Сохранено в " + nnpath + "\\logs\\" + filename, "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               /* // create a writer and open the file
-                TextWriter tw = new StreamWriter(folderBrowserDialog3save.SelectedPath + "logfile1.txt");
-                // write a line of text to the file
-                File.WriteAllText(filename, richTextBox1.Text);
-                tw.WriteLine(logfiletextbox);
-                // close the stream
-                tw.Close(); */
-                //MessageBox.Show("Saved to " + folderBrowserDialog3save.SelectedPath + "\\logfile.txt", "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+            label8.Visible = false;
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        
-            
+        private void button5_Click(object sender, EventArgs e)  // Мудреная запись              
         {
-   // Create a SaveFileDialog to request a path and file name to save to.
-   SaveFileDialog saveFile1 = new SaveFileDialog();
+            // Create a SaveFileDialog to request a path and file name to save to.
+            SaveFileDialog saveFile1 = new SaveFileDialog();
 
-   // Initialize the SaveFileDialog to specify the RTF extension for the file.
-   saveFile1.DefaultExt = "*.rtf";
-   saveFile1.Filter = "TXT Files (*.txt)|*.txt|RTF Files|*.rtf|All files (*.*)|*.*"; // https://msdn.microsoft.com/ru-ru/library/e4a710b1(v=vs.110).aspx
+            // Initialize the SaveFileDialog to specify the RTF extension for the file.
+            saveFile1.DefaultExt = "*.rtf";
+            saveFile1.Filter = "TXT Files (*.txt)|*.txt|RTF Files|*.rtf|All files (*.*)|*.*"; // https://msdn.microsoft.com/ru-ru/library/e4a710b1(v=vs.110).aspx
 
-   // Determine if the user selected a file name from the saveFileDialog.
-   if(saveFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK &&
-      saveFile1.FileName.Length > 0) 
-   {
-      // Save the contents of the RichTextBox into the file.
-      richTextBox1.SaveFile(saveFile1.FileName, RichTextBoxStreamType.PlainText);
-   }
-
-
+            // Determine if the user selected a file name from the saveFileDialog.
+            if(saveFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFile1.FileName.Length > 0) 
+            {
+                    // Save the contents of the RichTextBox into the file.
+                richTextBox1.SaveFile(saveFile1.FileName, RichTextBoxStreamType.PlainText);
+            }
         }
     }
 }
