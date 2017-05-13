@@ -233,7 +233,7 @@ namespace itiblab3
                     for (int i = 0; i < Out2.Count(); i++)
                     {
                         string vvv = Convert.ToString(Math.Round(Out2[i], tochnost + 1));
-                        richTextBox1.AppendText(vvv + " ");
+                        richTextBox1.AppendText(vvv + "  ");
                     }
                     richTextBox1.AppendText(Environment.NewLine);
                     richTextBox1.AppendText("   Веса скрытого слоя W1" + Environment.NewLine);
