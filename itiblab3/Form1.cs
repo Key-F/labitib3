@@ -14,6 +14,7 @@ namespace itiblab3
     public partial class Form1 : Form
     {
         static int count = 0;
+        List<double> En = new List<double>(); // будем хранить ошибки эпох
         public Form1()
         {
             InitializeComponent();
@@ -21,13 +22,15 @@ namespace itiblab3
         }
 
       
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Начало всего
         {
            
             label8.Visible = true;
             label8.Update();
+
         
             count = 0;
+            En.Clear();
 
             int N = Convert.ToInt32(textBox1.Text);
             int J = Convert.ToInt32(textBox3.Text);
@@ -97,10 +100,8 @@ namespace itiblab3
                 if (control != null)
                     t10[i - 7] = formula.ParseDouble1(textBox.Text); // Норм работает
             }
-
-            //if(J < )
-            
-
+            int tochnost = Convert.ToInt32(textBox13.Text);
+                        
             double[] netSKR = new double[J + 1]; // + 1 для 1 
             double[] netVIH = new double[M + 1]; // комбинированные входы нейронов скрытого и выходного слоев
             double[] OutSKR = new double[J];
@@ -138,35 +139,39 @@ namespace itiblab3
                     }
             }
             int a, b;
-            if (radioButton2.Checked == true)
-            {
-                a = Convert.ToInt32(textBox11.Text);
-                b = Convert.ToInt32(textBox12.Text);
-                for (int j = 0; j < J; j++)
-                    for (int i = 0; i < N + 1; i++)
-                    {
-                        WSKR[i, j] = (float)random.Next(10 * a, 10 * b) / 10f;
-                    }
-                for (int j = 0; j < M; j++)
-                    for (int i = 0; i < J + 1; i++)
-                    {
-                        WVIH[i, j] = (float)random.Next(10 * a, 10 * b) / 10f;
-                    }
-            }
-            for (int i = 0; i < t10.Length; i++)
-            
+         // int iter = 1;
+         // for (int asd = 1; asd < tochnost; asd++)
+            //  iter = iter * 10;
+                if (radioButton2.Checked == true)
+                {
+                    a = Convert.ToInt32(textBox11.Text);
+                    b = Convert.ToInt32(textBox12.Text);
+                    for (int j = 0; j < J; j++)
+                        for (int i = 0; i < N + 1; i++)
+                        {
+                            WSKR[i, j] = (float)random.Next(10 * a, 10 * b) / 10f; // iter * 10f для точности
+                        }
+                    for (int j = 0; j < M; j++)
+                        for (int i = 0; i < J + 1; i++)
+                        {
+                            WVIH[i, j] = (float)random.Next(10 * a, 10 * b) / 10f;
+                        }
+                }
+
+            for (int i = 0; i < t10.Length; i++)            
                 t10[i] = t10[i] * 0.1; 
-            work(N, J, M, t10, X, netSKR, netVIH, OutSKR, OutVIH, SigmaSKR, SigmaVIH, WSKR, WVIH);
+
+            work(tochnost, N, J, M, t10, X, netSKR, netVIH, OutSKR, OutVIH, SigmaSKR, SigmaVIH, WSKR, WVIH);
         }
-        public  void work(int N, int J, int M, double[] t, double[] X1, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
+        public  void work(int tochnost, int N, int J, int M, double[] t, double[] X1, double[] net1, double[] net2, double[] Out1, double[] Out2, double[] Sigma1, double[] Sigma2, double[,] W1, double[,] W2)
         {
 
             {
-                               
+
                 net1 = part1.net(W1, X1, N, J);
-                Out1 = part1.Out(Out1, net1, J);
+                Out1 = part1.Out(tochnost, Out1, net1, J);
                 net2 = part1.net(W2, Out1, J, M);
-                Out2 = part1.Out(Out2, net2, M);
+                Out2 = part1.Out(tochnost, Out2, net2, M);
 
                 Sigma1 = part2.sigmaJ(net1, J, M, W2, Sigma2);
                 Sigma2 = part2.sigmaM(net2, M, t, Out2);
@@ -174,8 +179,10 @@ namespace itiblab3
                 W1 = formula.SetW(W1, N, J, 1, X1, Sigma1);
                 W2 = formula.SetW(W2, J, M, 1, Out1, Sigma2);
 
-                double err = formula.error(t, Out2, M);
-                                 
+                double err = formula.error(tochnost, t, Out2, M);
+
+                En.Add(err);
+
                 if (err > 0)
                 {
                     richTextBox1.ScrollToCaret();
@@ -186,7 +193,7 @@ namespace itiblab3
                     
                     for (int i = 0; i < Out2.Count(); i++)
                     {
-                        string vvv=Convert.ToString(Math.Round(Out2[i], 3));
+                        string vvv = Convert.ToString(Math.Round(Out2[i], tochnost + 1));
                         richTextBox1.AppendText(vvv + " ");
                     }
                     richTextBox1.AppendText(Environment.NewLine);
@@ -195,7 +202,7 @@ namespace itiblab3
                     {
                         for (int j = 0; j < J; j++)
                         {
-                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W1[i, j], 2)) + "   ");
+                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W1[i, j], tochnost)) + "   ");
                         }
                         richTextBox1.AppendText(Environment.NewLine);
                     }
@@ -205,15 +212,15 @@ namespace itiblab3
                     {
                         for (int j = 0; j < M; j++)
                         {
-                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W2[i, j], 2)) + "   ");
+                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W2[i, j], tochnost)) + "   ");
                         }
                         richTextBox1.AppendText(Environment.NewLine);
                     }
                     richTextBox1.AppendText("      Среднеквадратическая ошибка: ");
-                    richTextBox1.AppendText(Convert.ToString(Math.Round(err, 3)) + Environment.NewLine);
+                    richTextBox1.AppendText(Convert.ToString(Math.Round(err, tochnost + 1)) + Environment.NewLine);
                     richTextBox1.AppendText(Environment.NewLine);
                     richTextBox1.ScrollToCaret();
-                    work(N, J, M, t, X1, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
+                    work(tochnost, N, J, M, t, X1, net1, net2, Out1, Out2, Sigma1, Sigma2, W1, W2);
 
                 }                    
                 else
@@ -225,7 +232,7 @@ namespace itiblab3
 
                     for (int i = 0; i < Out2.Count(); i++)
                     {
-                        string vvv = Convert.ToString(Math.Round(Out2[i], 3));
+                        string vvv = Convert.ToString(Math.Round(Out2[i], tochnost + 1));
                         richTextBox1.AppendText(vvv + " ");
                     }
                     richTextBox1.AppendText(Environment.NewLine);
@@ -234,7 +241,7 @@ namespace itiblab3
                     {
                         for (int j = 0; j < J; j++)
                         {
-                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W1[i, j], 2)) + "   ");
+                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W1[i, j], tochnost)) + "   ");
                         }
                         richTextBox1.AppendText(Environment.NewLine);
                     }
@@ -244,14 +251,16 @@ namespace itiblab3
                     {
                         for (int j = 0; j < M; j++)
                         {
-                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W2[i, j], 2)) + "   ");
+                            richTextBox1.AppendText("   " + Convert.ToString(Math.Round(W2[i, j], tochnost)) + "   ");
                         }
                         richTextBox1.AppendText(Environment.NewLine);
                     }
                     richTextBox1.AppendText("      Среднеквадратическая ошибка: ");
-                    richTextBox1.AppendText(Convert.ToString(Math.Round(err, 3)) + Environment.NewLine);
+                    richTextBox1.AppendText(Convert.ToString(Math.Round(err, tochnost + 1)) + Environment.NewLine);
                     richTextBox1.AppendText(Environment.NewLine);
                     richTextBox1.ScrollToCaret();
+                    
+
                     label8.Visible = false;
                 }
             }
@@ -323,6 +332,12 @@ namespace itiblab3
                     // Save the contents of the RichTextBox into the file.
                 richTextBox1.SaveFile(saveFile1.FileName, RichTextBoxStreamType.PlainText);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Form2 xc = new Form2(En);
+            xc.Show();
         }
     }
 }

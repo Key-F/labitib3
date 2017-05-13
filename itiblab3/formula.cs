@@ -35,12 +35,12 @@ namespace itiblab3
             }
             return W;
         }
-        public static double error(double[] t, double[] y, int M)
+        public static double error(int tochnost, double[] t, double[] y, int M)
         {
             double Error = 0;
             for (int j = 0; j < M; j++)
             {
-                Error += Math.Pow(Math.Round(t[j] - y[j], 2), 2);
+                Error += Math.Pow(Math.Round(t[j] - y[j], tochnost), 2);
             }
             return Math.Sqrt(Error);
         }

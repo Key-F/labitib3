@@ -61,6 +61,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -244,14 +247,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(210, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(233, 278);
+            this.richTextBox1.Size = new System.Drawing.Size(233, 345);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(112, 247);
+            this.button2.Location = new System.Drawing.Point(112, 300);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 23);
             this.button2.TabIndex = 3;
@@ -261,7 +264,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(13, 247);
+            this.button3.Location = new System.Drawing.Point(13, 300);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 23);
             this.button3.TabIndex = 4;
@@ -273,7 +276,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(29, 273);
+            this.label8.Location = new System.Drawing.Point(29, 326);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(163, 25);
             this.label8.TabIndex = 5;
@@ -288,9 +291,9 @@
             this.groupBox2.Controls.Add(this.textBox10);
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(23, 112);
+            this.groupBox2.Location = new System.Drawing.Point(13, 112);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(173, 104);
+            this.groupBox2.Size = new System.Drawing.Size(191, 104);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Установка весов";
@@ -361,7 +364,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(112, 222);
+            this.button4.Location = new System.Drawing.Point(112, 275);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(92, 23);
             this.button4.TabIndex = 7;
@@ -371,7 +374,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(13, 222);
+            this.button5.Location = new System.Drawing.Point(13, 275);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(93, 23);
             this.button5.TabIndex = 8;
@@ -379,11 +382,41 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(171, 222);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(33, 20);
+            this.textBox13.TabIndex = 10;
+            this.textBox13.Text = "2";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 225);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(158, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Число знаков после запятой:";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(34, 245);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(141, 24);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "Отобразить график E(n)";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 302);
+            this.ClientSize = new System.Drawing.Size(455, 369);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox2);
@@ -439,6 +472,9 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button6;
     }
 }
 

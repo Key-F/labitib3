@@ -25,12 +25,12 @@ namespace itiblab3
         {
             return ((1 - Math.Exp(-net)) / (1 + Math.Exp(-net)));
         }
-        public static double[] Out(double[] Out, double[] net, int kolneir) // kolneir - количество нейронов в слое, из которого считаем out
+        public static double[] Out(int tochnost, double[] Out, double[] net, int kolneir) // kolneir - количество нейронов в слое, из которого считаем out
         {
             //Out[0] = 1;
             for (int j = 0; j < kolneir; j++)
             {
-                Out[j] = Math.Round(fnet(net[j]), 2);
+                Out[j] = Math.Round(fnet(net[j]), tochnost);
             }
             return Out;
         } 
